@@ -1,7 +1,6 @@
 var clientId = "";
 
 var failureReasons = {
-    -1: "unknown error",
     0: "success",
     1: "invalid request",
     2: "authentication failed",
@@ -9,7 +8,8 @@ var failureReasons = {
     4: "resource does not exist",
     5: "rate limiting",
     6: "internal error",
-    7: "invalid response"
+    7: "invalid response",
+    8: "unknown error"
 };
 
 var failureReasonFromRequestStatus = function (status) {
@@ -61,7 +61,7 @@ var imgurAPIGetRequest = function (endpoint, successCallback, failureCallback) {
     imgurAPIRequest.setRequestHeader("Authorization", "Client-ID " + clientId);
 
     imgurAPIRequest.onreadystatechange = function () {
-        if (imgurAPIRequest != 4) return;
+        if (imgurAPIRequest.readyState != 4) return;
         var requestSuccessful = true,
             failureReason = 0,
             APIResponse;
