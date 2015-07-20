@@ -1,4 +1,4 @@
-var clientId = "";
+var clientId = "756da99e32105c9";
 
 var failureReasons = {
     0: "success",
