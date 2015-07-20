@@ -82,6 +82,7 @@ var imgurAPIGetRequest = function (endpoint, successCallback, failureCallback) {
                  * adding .xml to the request URL.
                  */
                 APIResponse = JSON.parse(imgurAPIRequest.responseText);
+                responseData = APIResponse.data;
             }
             catch (e) {
                 requestSuccessful = false;
@@ -91,7 +92,7 @@ var imgurAPIGetRequest = function (endpoint, successCallback, failureCallback) {
         }
 
         if (requestSuccessful) {
-            successCallback(APIResponse);
+            successCallback(responseData);
         }
         else {
             failureCallback(failureReason);
