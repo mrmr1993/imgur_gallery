@@ -9,7 +9,8 @@ var failureReasons = {
     5: "rate limiting",
     6: "internal error",
     7: "invalid response",
-    8: "unknown error"
+    8: "could not connect to server",
+    "-1": "unknown error"
 };
 
 var failureReasonFromRequestStatus = function (status) {
@@ -50,6 +51,9 @@ var failureReasonFromRequestStatus = function (status) {
              * basically means that something is broken with the Imgur service.
              */
             return 6;
+        case 0:
+            /* The XMLHttpRequest failed to complete (eg. timed out). */
+            return 8;
         default:
             return -1;
     }
