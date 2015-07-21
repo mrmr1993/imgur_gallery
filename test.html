@@ -13,9 +13,12 @@
           for (var i = 0;i < albumsInfo.length;i++) {
             getUserAlbumImages(accountName, albumsInfo[i].id, function (imagesInfo) {
               log(JSON.stringify(imagesInfo));
+              var imgWrapper = document.createElement("div");
+              imgWrapper.className = "align-centre";
               for (var i = 0;i < imagesInfo.length;i++) {
-                var img = document.createElement("img");
-                img.src = imagesInfo[i].link;
+                var imgInfo = imagesInfo[i],
+                    imgUrl = getImageThumbnail(imgInfo.id, imgInfo.link, "small"),
+                    img = renderImage(imgUrl, imgWrapper);
                 document.body.appendChild(img);
               }
             }, function (failureReason) {
@@ -28,8 +31,19 @@
       }, false);
     </script>
     <style type="text/css">
-      textarea {width: 100%; height: 45%;}
-      img {width: 50%;}
+      textarea {
+          width: 100%;
+          height: 45%;
+      }
+      div.align-centre {
+          margin: auto;
+          height: 200px;
+          width: 200px;
+          display: inline-block;
+      }
+      div.align-centre img {
+          vertical-align: middle;
+      }
     </style>
   </head>
   <body>
