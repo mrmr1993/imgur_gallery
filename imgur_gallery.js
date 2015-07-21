@@ -113,3 +113,38 @@ var getUserAlbumImages = function (account, albumId, successCallback,
     imgurAPIGetRequest("account/" + account + "/album/" + albumId + "/images",
             successCallback, failureCallback);
 };
+
+var getImageThumbnail = function (imageId, imageUrl, thumbnailSize) {
+    var thumbnailSizeString = ({
+        "smallsquare": "s",
+        "bigsquare": "b",
+        "small": "t",
+        "medium": "m",
+        "large": "l",
+        "huge": "h"
+    })[thumbnailSize] || "";
+    /* Use an <a href="..."> to manipulate the url, giving finer control over
+     * what we change. */
+    var urlReplacer = document.createElement("a");
+    urlReplacer.href = imageUrl;
+    urlReplacer.pathname = urlReplacer.pathname.replace(imageId, imageId +
+            thumbnailSizeString);
+    return urlReplacer.href;
+};
+
+/* If the optional second argument |wrapperElement| is provided, then the image
+ * will be appended to the first DOM descendant with class imageWrapper, or
+ * directly to |wrapperElement| if no such element exists.
+ * If |wrapperElement| is not an element, or is ommitted, the image element is
+ * returned directly. */
+var renderImage = function (imageUrl, wrapperElement) {
+    var img = document.createElement("img");
+    img.src = imageUrl;
+    if (wrapperElement == null || !(wrapperElement instanceof Element)) {
+        return img;
+    }
+    var wrapper = wrapperElement.cloneNode(true);
+    var injectionPoint = wrapper.querySelector("imageWrapper") || wrapper;
+    wrapper.appendChild(img);
+    return wrapper;
+};
