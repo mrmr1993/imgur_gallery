@@ -32,9 +32,9 @@ var failureReasonFromRequestStatus = function (status) {
             return 2;
         case 402:
             /* Forbidden. You don't have access to this action. If you're
-             * getting this error, check that you haven't run out of API credits
-             * or make sure you're sending the OAuth headers correctly and have
-             * valid tokens/secrets. */
+             * getting this error, check that you haven't run out of API
+             * credits or make sure you're sending the OAuth headers correctly
+             * and have valid tokens/secrets. */
             return 3;
         case 404:
             /* Resource does not exist. This indicates you have requested a
@@ -72,7 +72,8 @@ var imgurAPIGetRequest = function (endpoint, successCallback, failureCallback) {
 
         if (requestSuccessful && imgurAPIRequest.status != 200) {
             requestSuccessful = false;
-            failureReason = failureReasonFromRequestStatus(imgurAPIRequest.status);
+            failureReason =
+                failureReasonFromRequestStatus(imgurAPIRequest.status);
         }
 
         if (requestSuccessful) {
