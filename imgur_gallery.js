@@ -148,3 +148,13 @@ var renderImage = function (imageUrl, wrapperElement) {
     wrapper.appendChild(img);
     return wrapper;
 };
+
+if (typeof exports !== "undefined") {
+    exports.failureReasons = failureReasons
+    exports.failureReasonFromRequestStatus = failureReasonFromRequestStatus
+    exports.imgurAPIGetRequest = imgurAPIGetRequest
+    exports.getUserAlbums = getUserAlbums
+    exports.getUserAlbumImages = getUserAlbumImages
+    exports.getImageThumbnail = getImageThumbnail
+    exports.renderImage = renderImage
+}
