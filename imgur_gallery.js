@@ -1,3 +1,6 @@
+if (typeof XMLHttpRequest === "undefined") {
+    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+}
 var clientId = "756da99e32105c9";
 
 var failureReasons = {
@@ -60,6 +63,7 @@ var failureReasonFromRequestStatus = function (status) {
 };
 
 var imgurAPIGetRequest = function (endpoint, successCallback, failureCallback) {
+    /* TODO: IE >5.0 <7.0 supports XMLHttpRequest as an ActiveXObject. */
     var imgurAPIRequest = new XMLHttpRequest();
     imgurAPIRequest.open("GET", "https://api.imgur.com/3/" + endpoint, true);
     imgurAPIRequest.setRequestHeader("Authorization", "Client-ID " + clientId);
